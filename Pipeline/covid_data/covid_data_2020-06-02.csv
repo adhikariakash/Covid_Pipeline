@@ -3,27 +3,27 @@ date,state,number_of_cases
 2020-06-02,Tamil Nadu,0
 2020-06-02,Delhi,0
 2020-06-02,Gujarat,0
-2020-06-02,Rajasthan,0
+2020-06-02,Rajasthan,115
 2020-06-02,Uttar Pradesh,0
 2020-06-02,Madhya Pradesh,0
-2020-06-02,West Bengal,0
 2020-06-02,Unknown*,0
-2020-06-02,Bihar,0
-2020-06-02,Andhra Pradesh,0
+2020-06-02,West Bengal,0
+2020-06-02,Bihar,41
+2020-06-02,Andhra Pradesh,115
 2020-06-02,Karnataka,0
 2020-06-02,Telangana,0
 2020-06-02,Jammu and Kashmir,0
 2020-06-02,Haryana,0
 2020-06-02,Punjab,0
-2020-06-02,Odisha,0
-2020-06-02,Assam,0
+2020-06-02,Odisha,61
+2020-06-02,Assam,-12
 2020-06-02,Kerala,0
-2020-06-02,Uttarakhand,0
+2020-06-02,Uttarakhand,18
 2020-06-02,Jharkhand,0
 2020-06-02,Chhattisgarh,0
-2020-06-02,Tripura,0
-2020-06-02,Himachal Pradesh,0
-2020-06-02,Chandigarh,0
+2020-06-02,Tripura,23
+2020-06-02,Himachal Pradesh,-1
+2020-06-02,Chandigarh,3
 2020-06-02,Manipur,0
 2020-06-02,Puducherry,0
 2020-06-02,Ladakh,0
@@ -31,7 +31,7 @@ date,state,number_of_cases
 2020-06-02,Nagaland,0
 2020-06-02,Andaman and Nicobar Islands,0
 2020-06-02,Meghalaya,0
-2020-06-02,Arunachal Pradesh,0
+2020-06-02,Arunachal Pradesh,1
 2020-06-02,Mizoram,12
 2020-06-02,Dadra and Nagar Haveli,0
 2020-06-02,Sikkim,0

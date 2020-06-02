@@ -36,14 +36,15 @@ def fetch_covid_state_data():
     data = json.loads(url_data)
     covid_data = [['date', 'state', 'number_of_cases']]
     date = datetime.datetime.today().strftime('%Y-%m-%d')
-
+    csv_rows_count = 0
     for state in data:
         covid_data.append([date, state.get('state'), state.get('aChanges')])
-
+        csv_rows_count += 1
     with open("/home/nineleaps/PycharmProjects/COVID19_Airflow/Pipeline/covid_data/covid_data_{}.csv".format(date),
               "w") as f:
         writer = csv.writer(f)
         writer.writerows(covid_data)
+    return csv_rows_count
 
 
 def upload_covid_data():
@@ -77,7 +78,8 @@ def percent_upload(**kwargs):
     for row in query_job:
         total_rows = row[0]
     rows_affected = kwargs['ti'].xcom_pull(task_ids=['upload_covid_data'])
-    print("Percentage upload of data: {}".format((total_rows / rows_affected[0]) * 100))
+    csv_rows_count = kwargs['ti'].xcom_pull(task_ids=['fetch_data'])
+    print("Percentage upload of data: {}".format((rows_affected[0] / csv_rows_count[0]) * 100))
 
 
 t1 = PythonOperator(task_id='fetch_data', python_callable=fetch_covid_state_data, dag=dag)
