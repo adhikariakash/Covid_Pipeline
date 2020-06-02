@@ -18,12 +18,7 @@ client = bigquery.Client()
 default_args = {
     'owner': 'airflow',
     'start_date': days_ago(1),
-    # 'end_date': datetime(2018, 12, 30),
     'depends_on_past': False,
-    # 'email': ['airflow@example.com'],
-    # 'email_on_failure': False,
-    # 'email_on_retry': False,
-    # if a task fails retry it once
     'retries': 1,
     'retry_delay': timedelta(minutes=2),
 }
