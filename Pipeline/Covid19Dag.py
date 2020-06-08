@@ -8,6 +8,7 @@ import requests
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 from google.cloud import bigquery
+from google.cloud.exceptions import BadRequest
 
 os.environ[
     "GOOGLE_APPLICATION_CREDENTIALS"] = "/home/nineleaps/PycharmProjects/COVID19_Airflow/Pipeline/COVID19AIRFLOW.json"
@@ -47,10 +48,32 @@ def fetch_covid_state_data():
     return csv_rows_count
 
 
+def create_table():
+    try:
+        dataset_ref = client.dataset(dataset_id)
+        dataset = bigquery.Dataset(dataset_ref)
+        if client.get_dataset(dataset_ref):
+            print("Table already exists")
+            return True
+        client.create_dataset(dataset)
+        schema = [
+            bigquery.SchemaField("date", "DATE", mode="NULLABLE"),
+            bigquery.SchemaField("state", "STRING", mode="NULLABLE"),
+            bigquery.SchemaField("number_of_cases", "INTEGER", mode="NULLABLE"),
+        ]
+        table_ref = dataset_ref.table(table_id)
+        table = bigquery.Table(table_ref, schema=schema)
+        table = client.create_table(table)  # API request
+        print("Created table {}".format(table.full_table_id))
+        return True
+    except BadRequest as e:
+        print('ERROR: {}'.format(e['message']))
+
 def upload_covid_data():
     filename = "/home/nineleaps/PycharmProjects/COVID19_Airflow/Pipeline/covid_data/covid_data_{}.csv".format(
         datetime.datetime.today().strftime('%Y-%m-%d'))
     try:
+        create_table()
         dataset_ref = client.dataset(dataset_id)
         table_ref = dataset_ref.table(table_id)
         job_config = bigquery.LoadJobConfig()
